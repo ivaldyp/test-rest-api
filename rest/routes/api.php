@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::apiResource('books', 'Api\V1\BookController');
+
+Route::apiResource('authors', 'Api\V1\AuthorController');
+
+Route::apiResource('tags', 'Api\V1\TagController');
+
+Route::get('books', 'BookController@index');
+Route::get('books/{id}', 'BookController@show');
