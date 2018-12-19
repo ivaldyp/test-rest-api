@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Tag;
+use App\Http\Resources\Tag as TagResource;
 use App\Http\Controllers\Controller;
 
 class TagController extends Controller
@@ -14,7 +17,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return TagResource::collection($tags);
     }
 
     /**
@@ -35,7 +39,14 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = $request->isMethod('put') ? Tag::findOrFail($request->id) : new Tag;
+
+        $tag->id = $request->input('id');
+        $tag->name_type = $request->input('name_type');
+
+        if($tag->save()){
+            return new TagResource($tag);
+        }
     }
 
     /**
@@ -46,7 +57,8 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return new TagResource($tag);
     }
 
     /**
@@ -80,6 +92,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        if ($tag->delete()) {
+            return new TagResource($tag);
+        }
     }
 }

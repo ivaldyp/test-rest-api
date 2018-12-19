@@ -29,3 +29,9 @@ Route::get('authors/{id}', 'Api\V1\AuthorController@show');
 Route::delete('authors/{id}', 'Api\V1\AuthorController@destroy');
 Route::post('authors', 'Api\V1\AuthorController@store');
 Route::put('authors', 'Api\V1\AuthorController@store');
+
+Route::get('tags', 'Api\V1\TagController@index');
+Route::get('tags/{id}', 'Api\V1\TagController@show');
+Route::delete('tags/{id}', 'Api\V1\TagController@destroy');
+Route::post('tags', 'Api\V1\TagController@store');
+Route::put('tags', 'Api\V1\TagController@store');
