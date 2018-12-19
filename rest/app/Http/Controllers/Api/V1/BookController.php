@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use App\Book;
 use App\Http\Requests;
+use App\Book;
+use App\Http\Resources\Book as BookResource;
 use App\Http\Controllers\Controller;
-// use App\Http\Resources\Book as BookResource;
 
 class BookController extends Controller
 {
@@ -18,14 +18,21 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-
         return response()->json([
             "message" => "success",
             "data" => $books
         ]);
-
-        // $books = Book::paginate(20);
         // return BookResource::collection($books);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -36,45 +43,49 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = $request->isMethod('put') ? Book::findOrFail($request->id) : new Book;
+
+        $book->id = $request->input('id');
+        $book->title = $request->input('title');
+        $book->synopsis = $request->input('synopsis');
+        $book->publish_year = $request->input('publish_year');
+
+        if($book->save()){
+            return new BookResource($book);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $id_book)
+    public function show($id)
     {
-        $books = Book::all();
+        $book = Book::findOrFail($id);
+        return new BookResource($book);
+    }
 
-        // return response()->json($id);
-
-        // return response()->json([
-        //     "message" => "success",
-        //     "data" => $id
-        // ]);
-
-        foreach ($books as $single_book) {
-            if($id_book == $single_book->id_book){
-                return response()->json([
-                    "message" => "success",
-                    "data" => $single_book
-                ]);
-            }
-        }
-        
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -82,11 +93,14 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        if ($book->delete()) {
+            return new BookResource($book);
+        }
     }
 }
