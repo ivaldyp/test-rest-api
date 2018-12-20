@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Author;
 use App\Http\Resources\Author as AuthorResource;
@@ -17,8 +19,47 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        return AuthorResource::collection($authors);
+        // $authors = Author::all();
+        // return AuthorResource::collection($authors);
+
+        $data['authors'] = 
+            DB::select('SELECT id, name, country
+                        FROM authors
+                        ORDER BY id ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+    }
+    
+    public function indexname()
+    {
+        // $authors = Author::all();
+        // return AuthorResource::collection($authors);
+
+        $data['authors'] = 
+            DB::select('SELECT id, name, country
+                        FROM authors
+                        ORDER BY name ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+    }
+
+    public function indexcountry()
+    {
+        // $authors = Author::all();
+        // return AuthorResource::collection($authors);
+
+        $data['authors'] = 
+            DB::select('SELECT id, name, country
+                        FROM authors
+                        ORDER BY country ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
     }
 
     /**

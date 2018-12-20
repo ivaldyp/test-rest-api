@@ -32,6 +32,51 @@ class BookController extends Controller
         // return BookResource::collection($books);
     }
 
+    public function indextitle()
+    {
+        // $books = Book::all();
+        $data['books'] = 
+            DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+                        FROM books b
+                        INNER JOIN authors a ON a.id = b.id_author
+                        ORDER BY b.title ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+        // return BookResource::collection($books);
+    }
+
+    public function indexyear()
+    {
+        // $books = Book::all();
+        $data['books'] = 
+            DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+                        FROM books b
+                        INNER JOIN authors a ON a.id = b.id_author
+                        ORDER BY b.publish_year ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+        // return BookResource::collection($books);
+    }
+
+    public function indexauthor()
+    {
+        // $books = Book::all();
+        $data['books'] = 
+            DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+                        FROM books b
+                        INNER JOIN authors a ON a.id = b.id_author
+                        ORDER BY a.name ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+        // return BookResource::collection($books);
+    }
+
     public function search(Request $request)
     {
         // $book_name = $request->search_book;

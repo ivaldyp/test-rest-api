@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Tag;
 use App\Http\Resources\Tag as TagResource;
@@ -17,8 +19,32 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return TagResource::collection($tags);
+        // $tags = Tag::all();
+        // return TagResource::collection($tags);
+
+        $data['tags'] = 
+            DB::select('SELECT id, name_type, type_exp
+                        FROM tags
+                        ORDER BY id ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
+    }
+
+    public function indexname()
+    {
+        // $tags = Tag::all();
+        // return TagResource::collection($tags);
+
+        $data['tags'] = 
+            DB::select('SELECT id, name_type, type_exp
+                        FROM tags
+                        ORDER BY name_type ASC');
+        return response()->json([
+            "message" => "success",
+            "data" => $data
+        ]);
     }
 
     /**
