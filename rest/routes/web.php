@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'authors'], function () {
+	Route::get('table', 'AuthorController@showAll');
+	Route::get('form', 'AuthorController@showForm');
+	Route::post('store', 'AuthorController@store');
+});
+
+Route::group(['prefix' => 'books'], function () {
+	Route::get('table', 'BookController@showAll');
+});
+
+Route::group(['prefix' => 'tags'], function () {
+	Route::get('table', 'TagController@showAll');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

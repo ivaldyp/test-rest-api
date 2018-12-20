@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests;
-use App\Book;
-use App\Http\Resources\Book as BookResource;
-use App\Http\Controllers\Controller;
 
-class BookController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,17 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        // $books = Book::all();
-        $data['books'] = 
-            DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
-                        FROM books b
-                        INNER JOIN authors a ON a.id = b.id_author
-                        ORDER BY b.id ASC');
-        return response()->json([
-            "message" => "success",
-            "data" => $data
-        ]);
-        // return BookResource::collection($books);
+        //
     }
 
     /**
@@ -50,16 +34,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $book = $request->isMethod('put') ? Book::findOrFail($request->id) : new Book;
-
-        $book->id = $request->input('id');
-        $book->title = $request->input('title');
-        $book->synopsis = $request->input('synopsis');
-        $book->publish_year = $request->input('publish_year');
-
-        if($book->save()){
-            return new BookResource($book);
-        }
+        //
     }
 
     /**
@@ -70,8 +45,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::findOrFail($id);
-        return new BookResource($book);
+        //
     }
 
     /**
@@ -105,9 +79,6 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::findOrFail($id);
-        if ($book->delete()) {
-            return new BookResource($book);
-        }
+        //
     }
 }
