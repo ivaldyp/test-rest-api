@@ -18,21 +18,21 @@ class AuthorController extends Controller
 
     public function showAll()
     {
-        $authors = Author::all();
+        // $authors = Author::all();
         $data['authors'] = 
             DB::select('SELECT id, name, country 
                         FROM authors');
         return view('pages.authors.table', $data);
     }
 
+    public function showForm()
+    {
+        return view('pages.authors.form');
+    }
+
     public function show($id)
     {
         //
-    }
-
-    public function showForm()
-    {
-        return view('pages.authors.form', ['sukses' => 1]);
     }
 
     public function create()
@@ -54,16 +54,28 @@ class AuthorController extends Controller
 
     public function edit($id)
     {
-        //
+        $author = Author::where('id', $id)->first();
+        return view('pages.authors.modal')->with('author', $author);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $author = Author::find($id);
+
+        $author->name = $request->name;
+        $author->country = $request->country;
+
+        if($author->save()) {
+            return redirect('authors/table')->with('message', 'Author data edited successfully');
+        } else {
+            return redirect('authors/form')->with('message', 'Failed to edit author data');
+        }
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $author = Author::where('id', $id);
+        $author->delete();
+        return redirect('authors/table');
     }
 }

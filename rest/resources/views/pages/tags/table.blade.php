@@ -3,40 +3,38 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-6">
 
             @if(Session::has('message'))
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
 
-            <a href="{{ url('authors/form') }}">
-                <button class="btn btn-primary" style="margin-bottom: 10px">Add New Author</button>
+            <a href="{{ url('tags/form') }}">
+                <button class="btn btn-primary" style="margin-bottom: 10px">Add New Genre</button>
             </a>
             <div class="card">
-                <div class="card-header">Author List</div>
+                <div class="card-header">Genre List</div>
 
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Name</th>
-                                <th>Country</th>
+                                <th>Genre</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($authors as $key => $author)
+                        @foreach($tags as $key => $tag)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $author->name }}</td>
-                                <td>{{ $author->country }}</td>
+                                <td>{{ $tag->name_type }}</td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{$key}}">Detail</button>
-                                    <a href="{{ url('authors/edit') }}/{{ $author->id }}">
+                                    <a href="{{ url('tags/edit') }}/{{ $tag->id }}">
                                         <button class="btn btn-info">Edit</button>
                                     </a>
-                                    <a href="{{ url('authors/delete') }}/{{ $author->id }}">
+                                    <a href="{{ url('tags/delete') }}/{{ $tag->id }}">
                                         <button class="btn btn-danger">Delete</button>
                                     </a>
                                 </td>
@@ -53,10 +51,7 @@
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <h4><b>Name</b>: {{$author->name}}</h4>
-                                                            </tr>
-                                                            <tr>
-                                                                <h4><b>Author</b>: {{$author->country}}</h4>
+                                                                <h4><b>Genre</b>: {{$tag->name_type}}</h4>
                                                             </tr>
                                                         </tbody>
                                                     </table>
