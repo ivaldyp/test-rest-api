@@ -51,36 +51,42 @@ localhost/test-rest-api/rest/public/api/{{route}}
 Berikut merupakan method dan route yang digunakan:
 1. Tabel Books
 ```
-Get all data, order by ID     : GET     : /books
-Get all data, order by title  : GET     : /books-by-title
-Get all data, order by year   : GET     : /books-by-year
-Get all data, order by author : GET     : /books-by-author
-Get data, search by name      : POST    : /books/search - (parameter: search_book(str))
-Get single data by ID         : GET     : /books/{id}
-Delete data                   : DELETE  : /books/{id}
-Insert data                   : POST    : /books - (parameter: title(str), synopsis(str), publish_year(int))
-Update data                   : PUT     : /books - (parameter: id(int), title(str), synopsis(str), publish_year(int))
+Fungsi                        : Method  : Route             : Parameter
+------------------------------:---------:-------------------:------------------------------------------------------
+Get all data, order by ID     : GET     : /books            :
+Get all data, order by title  : GET     : /books-by-title   :
+Get all data, order by year   : GET     : /books-by-year    :
+Get all data, order by author : GET     : /books-by-author  : 
+Get data, search by name      : POST    : /books/search     : search_book(str)
+Get single data by ID         : GET     : /books/{id}       :
+Delete data                   : DELETE  : /books/{id}       :
+Insert data                   : POST    : /books            : title(str), synopsis(str), publish_year(int)
+Update data                   : PUT     : /books            : id(int), title(str), synopsis(str), publish_year(int)
 ```
 
 2. Tabel Authors
 ```
-Get all data, order by ID       : GET     :/authors
-Get all data, order by name     : GET     :/authors
-Get all data, order by country  : GET     :/authors
-Get single data                 : GET     :/authors/{id}
-Delete data                     : DELETE  :/authors/{id}
-Insert data                     : POST    :/authors - (parameter: name(str), country(str))
-Update data                     : PUT     :/authors - (parameter: id(int), name(str), country(str))
+Fungsi                          : Method  : Route         : Parameter
+--------------------------------:---------:---------------:---------------------------------
+Get all data, order by ID       : GET     : /authors      :
+Get all data, order by name     : GET     : /authors      :
+Get all data, order by country  : GET     : /authors      :
+Get single data                 : GET     : /authors/{id} :
+Delete data                     : DELETE  : /authors/{id} :
+Insert data                     : POST    : /authors      : name(str), country(str)
+Update data                     : PUT     : /authors      : id(int), name(str), country(str)
 ```
 
 3. Tabel Tags
 ```
-Get all data, order by ID   : GET     :/tags
-Get all data, order by name : GET     :/tags
-Get single data             : GET     :/tags/{id}
-Delete data                 : DELETE  :/tags/{id}
-Insert data                 : POST    :/tags - (parameter: name_type(str), type_exp(str))
-Update data                 : PUT     :/tags - (parameter: id(int), name_type(str), type_exp(str))
+Fungsi                      : Method  : Route       : Parameter
+----------------------------:---------:-------------:---------------------------------------
+Get all data, order by ID   : GET     : /tags       :
+Get all data, order by name : GET     : /tags       :
+Get single data             : GET     : /tags/{id}  :
+Delete data                 : DELETE  : /tags/{id}  :
+Insert data                 : POST    : /tags       : name_type(str), type_exp(str)
+Update data                 : PUT     : /tags       : id(int), name_type(str), type_exp(str)
 ```
 
 ## Menggunakan Web
