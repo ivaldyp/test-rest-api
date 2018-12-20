@@ -30,17 +30,17 @@ Routing untuk menampilkan API dijelaskan pada lokasi direktori **test-rest-api/r
 
 ### Tabel Utama
 Aplikasi ini memiliki 3 tabel utama yaitu:
-1. Books - untuk menyimpan data detail buku.
-2. Authors - untuk menyimpan data pengarang buku.
-3. Tags - untuk menyimpan data genre dari masing-masing buku.
+1. Books    - untuk menyimpan data detail buku.
+2. Authors  - untuk menyimpan data pengarang buku.
+3. Tags     - untuk menyimpan data genre dari masing-masing buku.
 
 ### Cara Mengakses API
 Ada 2 cara untuk mencoba mengakses API:
-1. Apabila **php artisan serve** sudah diaktifkan, gunakan cara seperti ini untuk mencoba mengakses API
+* Apabila **php artisan serve** sudah diaktifkan, gunakan cara seperti ini untuk mencoba mengakses API
 ```
 http://127.0.0.1:8000/api/{{route}}
 ```
-2. Apabila tidak ingin mengaktifkan **php artisan serve**, gunakan cara seperti ini untuk mencoba mengakses API
+* Apabila tidak ingin mengaktifkan **php artisan serve**, gunakan cara seperti ini untuk mencoba mengakses API
 ```
 localhost/test-rest-api/rest/public/api/{{route}}
 ```
