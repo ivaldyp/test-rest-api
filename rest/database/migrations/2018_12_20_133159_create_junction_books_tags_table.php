@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksTable extends Migration
+class CreateJunctionBooksTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('junction_books_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('synopsis');
-            $table->integer('publish_year');
-            $table->integer('id_author')->unsigned();
+            $table->integer('id_book')->unsigned();
+            $table->integer('id_type')->unsigned();
             $table->timestamps();
 
-
-            $table->foreign('id_author')->references('id')->on('authors');
+            $table->foreign('id_book')->references('id')->on('books');
+            $table->foreign('id_type')->references('id')->on('tags');
         });
     }
 
@@ -33,6 +31,6 @@ class CreateBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('junction_books_tags');
     }
 }

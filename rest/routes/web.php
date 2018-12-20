@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('search', 'BookController@search');
+
 Route::group(['prefix' => 'authors'], function () {
 	Route::get('table', 'AuthorController@showAll');
 	Route::get('form', 'AuthorController@showForm');

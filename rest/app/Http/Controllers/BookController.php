@@ -23,6 +23,7 @@ class BookController extends Controller
         $data['books'] = DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
                         FROM books b
                         INNER JOIN authors a ON a.id = b.id_author');
+        $data['count'] = count($data['books']);
         return view('pages.books.table', $data);
     }
 
@@ -38,6 +39,19 @@ class BookController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $book_name = $request->search_book;
+        $data['books'] = DB::select("
+            SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+            FROM books b
+            INNER JOIN authors a ON a.id = b.id_author
+            WHERE b.title like '%$book_name%'
+            ");
+        $data['count'] = count($data['books']);
+        return view('pages.books.table', $data);
+    }
+
     public function create()
     {
         //
@@ -51,6 +65,7 @@ class BookController extends Controller
         $book->publish_year = $request->publish_year;
         $book->id_author = $request->id_author;
         $book->id_type = $request->id_type;
+        var_dump($request->id_type);die();
 
         if($book->save()) {
             return redirect('books/table')->with('message', 'Book data added successfully');

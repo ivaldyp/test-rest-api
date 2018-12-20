@@ -40,8 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Genre</label>
-                                <select class="form-control" name="id_type" required>
-                                    <option value="" selected disabled>--</option>
+                                <select class="form-control js-example-basic-multiple" name="id_type[]" required multiple="multiple">
                                     @foreach($data['tags'] as $tag)
                                     <option
                                     <?php if($data['book']->id_type == $tag['id'])
@@ -63,4 +62,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('select2js')
+<script type="text/javascript">
+    $('.js-example-basic-multiple').select2();
+</script>
 @endsection
