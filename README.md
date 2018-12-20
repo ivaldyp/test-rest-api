@@ -35,6 +35,8 @@ Aplikasi ini memiliki 3 tabel utama yaitu:
 3. Tags     - untuk menyimpan data genre dari masing-masing buku.
 
 ### Cara Mengakses API
+API dapat diakses dengan menggunakan aplikasi [Postman.](https://www.getpostman.com/) 
+
 Ada 2 cara untuk mencoba mengakses API:
 * Apabila **php artisan serve** sudah diaktifkan, gunakan cara seperti ini untuk mencoba mengakses API
 ```
@@ -49,11 +51,12 @@ localhost/test-rest-api/rest/public/api/{{route}}
 Berikut merupakan method dan route yang digunakan:
 1. Tabel Books
 ```
-Get all data    : /books - GET
-Get single data : /books/{id} - GET
-Delete data     : /books/{id} - POST
-Insert data     : /books - POST
-Update data     : /books - PUT
+Get all data            : /books - GET
+Get single data by ID   : /books/{id} - GET
+Get single data by name : /books/search - POST (parameter: search_book(str))
+Delete data             : /books/{id} - POST 
+Insert data             : /books - POST (parameter: title(str), synopsis(str), publish_year(int))
+Update data             : /books - PUT (parameter: id(int), title(str), synopsis(str), publish_year(int))
 ```
 
 2. Tabel Authors
@@ -61,8 +64,8 @@ Update data     : /books - PUT
 Get all data    : /authors - GET
 Get single data : /authors/{id} - GET
 Delete data     : /authors/{id} - POST
-Insert data     : /authors - POST
-Update data     : /authors - PUT
+Insert data     : /authors - POST (parameter: name(str), country(str))
+Update data     : /authors - PUT (parameter: id(int), name(str), country(str))
 ```
 
 1. Tabel Tags
@@ -70,8 +73,8 @@ Update data     : /authors - PUT
 Get all data    : /tags - GET
 Get single data : /tags/{id} - GET
 Delete data     : /tags/{id} - POST
-Insert data     : /tags - POST
-Update data     : /tags - PUT
+Insert data     : /tags - POST (parameter: name_type(str), type_exp(str))
+Update data     : /tags - PUT (parameter: id(int), name_type(str), type_exp(str))
 ```
 
 ## Menggunakan Web
