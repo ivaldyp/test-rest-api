@@ -72,7 +72,11 @@ class TagController extends Controller
     public function delete($id)
     {
         $tag = Tag::where('id', $id);
-        $tag->delete();
+        if($tag->delete()) {
+            return redirect('tags/table')->with('message', 'Tag data deleted successfully');
+        } else {
+            return redirect('tags/table')->with('message', 'Failed to delete tag data');
+        }
         return redirect('tags/table');
     }
 }

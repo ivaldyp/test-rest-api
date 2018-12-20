@@ -75,7 +75,11 @@ class AuthorController extends Controller
     public function delete($id)
     {
         $author = Author::where('id', $id);
-        $author->delete();
+        if($author->delete()) {
+            return redirect('authors/table')->with('message', 'Author data deleted successfully');
+        } else {
+            return redirect('authors/table')->with('message', 'Failed to delete author data');
+        }
         return redirect('authors/table');
     }
 }

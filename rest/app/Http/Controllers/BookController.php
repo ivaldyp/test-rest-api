@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Book;
+use App\Tag;
+use App\Author;
 use App\Http\Controllers\Controller;
 
 class BookController extends Controller
@@ -18,8 +20,7 @@ class BookController extends Controller
 
     public function showAll()
     {
-        $data['books'] = 
-            DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+        $data['books'] = DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
                         FROM books b
                         INNER JOIN authors a ON a.id = b.id_author');
         return view('pages.books.table', $data);
@@ -27,7 +28,9 @@ class BookController extends Controller
 
     public function showForm()
     {
-        return view('pages.books.form');
+        $data['tags'] = Tag::all();
+        $data['authors'] = Author::all();
+        return view('pages.books.form', $data);
     }
 
     public function show($id)
@@ -43,39 +46,52 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $book = new Book;
-        $book->name = $request->name;
-        $book->country = $request->country;
+        $book->title = $request->title;
+        $book->synopsis = $request->synopsis;
+        $book->publish_year = $request->publish_year;
+        $book->id_author = $request->id_author;
+        $book->id_type = $request->id_type;
+
         if($book->save()) {
-            return redirect('authors/table')->with('message', 'Author data added successfully');
+            return redirect('books/table')->with('message', 'Book data added successfully');
         } else {
-            return redirect('authors/form')->with('message', 'Failed to insert author data');
+            return redirect('books/form')->with('message', 'Failed to insert book data');
         }
     }
 
     public function edit($id)
     {
-        $author = Author::where('id', $id)->first();
-        return view('pages.authors.modal')->with('author', $author);
+        $data['tags'] = Tag::all();
+        $data['authors'] = Author::all();
+        $data['book'] = Book::where('id', $id)->first();
+        return view('pages.books.modal')->with('data', $data);
     }
 
     public function update(Request $request, $id)
     {
-        $author = Author::find($id);
+        $book = Book::find($id);
 
-        $author->name = $request->name;
-        $author->country = $request->country;
+        $book->title = $request->title;
+        $book->synopsis = $request->synopsis;
+        $book->publish_year = $request->publish_year;
+        $book->id_author = $request->id_author;
+        $book->id_type = $request->id_type;
 
-        if($author->save()) {
-            return redirect('authors/table')->with('message', 'Author data edited successfully');
+        if($book->save()) {
+            return redirect('books/table')->with('message', 'Book data edited successfully');
         } else {
-            return redirect('authors/form')->with('message', 'Failed to edit author data');
+            return redirect('books/form')->with('message', 'Failed to edit book data');
         }
     }
 
     public function delete($id)
     {
-        $author = Author::where('id', $id);
-        $author->delete();
-        return redirect('authors/table');
+        $book = Book::where('id', $id);
+        if($book->delete()) {
+            return redirect('books/table')->with('message', 'Book data deleted successfully');
+        } else {
+            return redirect('books/table')->with('message', 'Failed to delete book data');
+        }
+        return redirect('books/table');
     }
 }

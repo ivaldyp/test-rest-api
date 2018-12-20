@@ -45,7 +45,7 @@
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">Author {{$key+1}}</h4>
+                                                    <h4 class="modal-title">Tag {{$key+1}}</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <table>
