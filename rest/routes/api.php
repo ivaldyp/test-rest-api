@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 // Route::apiResource('authors', 'Api\V1\AuthorController');
 // Route::apiResource('tags', 'Api\V1\TagController');
 Route::get('books', 'Api\V1\BookController@index');
+Route::post('books/search', 'Api\V1\BookController@search');
 Route::get('books/{id}', 'Api\V1\BookController@show');
 Route::delete('books/{id}', 'Api\V1\BookController@destroy');
 Route::post('books', 'Api\V1\BookController@store');

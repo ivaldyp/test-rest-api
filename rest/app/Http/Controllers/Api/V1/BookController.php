@@ -32,6 +32,25 @@ class BookController extends Controller
         // return BookResource::collection($books);
     }
 
+    public function search(Request $request)
+    {
+        // $book_name = $request->search_book;
+        $book_name = $request->input('search_book');
+        $data['books'] = DB::select("
+            SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+            FROM books b
+            INNER JOIN authors a ON a.id = b.id_author
+            WHERE b.title like '%$book_name%'
+            ");
+        $data['count'] = count($data['books']);
+        
+        return response()->json([
+            "message" => "success",
+            "total" => $data['count'],
+            "data" => $data['books']
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
