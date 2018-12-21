@@ -2,16 +2,29 @@
 
 @section('content')
 <div class="container">
+    <div class="row d-flex">
+        <div class="p-2">
+            <a href="{{ url('tags/form') }}">
+                <button class="btn btn-success" style="margin-bottom: 10px; margin-right: 10px">Add New Tags</button>
+            </a>
+            <a href="{{ url('tags/table') }}">
+                <button class="btn btn-primary" style="margin-bottom: 10px">Show All Tags</button>
+            </a>
+        </div>
+        <div class="ml-auto p-2">
+            <div class="form-group">
+                <form method="GET" action="search">
+                    <input type="text" name="search_tag" class="form-control" autocomplete="off" placeholder="Genre name ...">
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
 
             @if(Session::has('message'))
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
-
-            <a href="{{ url('tags/form') }}">
-                <button class="btn btn-success" style="margin-bottom: 10px">Add New Genre</button>
-            </a>
 
             <div class="card">
                 <div class="card-header">Genre List</div>
@@ -63,7 +76,7 @@
                                                             </tr>
                                                             <hr>
                                                             <tr>
-                                                                <h4><b>Books example with this genre:</b></h4>
+                                                                <h4><b>Books in this genre:</b></h4>
                                                             </tr>
                                                             <?php $i=1; ?>
                                                             @foreach($books as $book)

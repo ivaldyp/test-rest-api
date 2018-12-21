@@ -21,13 +21,60 @@ class AuthorController extends Controller
         // $authors = Author::all();
         $data['authors'] = 
             DB::select('SELECT id, name, country 
-                        FROM authors');
+                        FROM authors
+                        ORDER BY name ASC');
+        $data['books'] = 
+            DB::select('SELECT id, title, id_author, publish_year
+                        FROM books
+                        ORDER BY publish_year ASC, title ASC');
         return view('pages.authors.table', $data);
     }
 
     public function showForm()
     {
         return view('pages.authors.form');
+    }
+
+    public function search(Request $request)
+    {
+        $author_name = $request->search_author;
+        $data['authors'] = DB::select("
+            SELECT id, name, country 
+            FROM authors
+            WHERE name like '%$author_name%'
+            ORDER BY name ASC
+            ");
+        $data['books'] = 
+            DB::select('SELECT id, title, id_author, publish_year
+                        FROM books
+                        ORDER BY publish_year ASC, title ASC');
+        $data['count'] = count($data['authors']);
+        return view('pages.authors.table', $data);
+    }
+
+    public function sort(Request $request)
+    {
+        $author_sort = $request->sort_author;
+        if ($author_sort == 1) {
+            $data['authors'] = DB::select("
+            SELECT id, name, country 
+            FROM authors
+            ORDER BY name ASC
+            ");
+        } elseif  ($author_sort == 2) {
+            $data['authors'] = DB::select("
+            SELECT id, name, country 
+            FROM authors
+            ORDER BY country ASC
+            ");
+        }
+
+        $data['books'] = 
+            DB::select('SELECT id, title, id_author, publish_year
+                        FROM books
+                        ORDER BY publish_year ASC, title ASC');
+        $data['count'] = count($data['authors']);
+        return view('pages.authors.table', $data);
     }
 
     public function show($id)

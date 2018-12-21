@@ -2,16 +2,46 @@
 
 @section('content')
 <div class="container">
+    <div class="row d-flex">
+        <div class="p-2">
+            <a href="{{ url('authors/form') }}">
+                <button class="btn btn-success" style="margin-bottom: 10px">Add New Author</button>
+            </a>
+            <a href="{{ url('authors/table') }}">
+                <button class="btn btn-primary" style="margin-bottom: 10px">Show All Authors</button>
+            </a>
+        </div>
+        <div class="ml-auto p-2">
+            <div class="form-group">
+                <form method="GET" action="search">
+                    <input type="text" name="search_author" class="form-control" autocomplete="off" placeholder="Author name ...">
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
+        <div class="col-md-12" style="margin-bottom: 10px">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <form method="GET" action="sort">
+                        <label>Sort by </label>
+                        <select  class="form-control" name="sort_author" required onchange="this.form.submit()">
+                            <option selected disabled>--</option>
+                            <option value="1">Name</option>
+                            <option value="2">Country</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-5"></div>
+        </div>
         <div class="col-md-12">
 
             @if(Session::has('message'))
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
 
-            <a href="{{ url('authors/form') }}">
-                <button class="btn btn-success" style="margin-bottom: 10px">Add New Author</button>
-            </a>
             <div class="card">
                 <div class="card-header">Author List</div>
 
@@ -58,6 +88,19 @@
                                                             <tr>
                                                                 <h4><b>Country from</b>: {{$author->country}}</h4>
                                                             </tr>
+                                                            <hr>
+                                                            <tr>
+                                                                <h4><b>Books:</b></h4>
+                                                            </tr>
+                                                            <?php $i=1; ?>
+                                                            @foreach($books as $book)
+                                                                @if($book->id_author == $author->id)
+                                                                <tr>
+                                                                    <h4>{{$i}}. {{$book->title}} ({{$book->publish_year}})</h4>
+                                                                </tr>
+                                                                <?php $i+=1; ?>
+                                                                @endif
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>

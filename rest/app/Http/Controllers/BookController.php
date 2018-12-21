@@ -22,7 +22,14 @@ class BookController extends Controller
     {
         $data['books'] = DB::select('SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
                         FROM books b
-                        INNER JOIN authors a ON a.id = b.id_author');
+                        INNER JOIN authors a ON a.id = b.id_author
+                        ORDER BY b.title ASC');
+        $data['tags'] = 
+            DB::select('SELECT b.id as book_id, t.id as tag_id, t.name_type 
+                        FROM junction_books_tags j 
+                        INNER JOIN tags t ON t.id = j.id_type 
+                        INNER JOIN books b ON b.id = j.id_book
+                        ORDER BY t.name_type');
         $data['count'] = count($data['books']);
         return view('pages.books.table', $data);
     }
@@ -48,6 +55,12 @@ class BookController extends Controller
             INNER JOIN authors a ON a.id = b.id_author
             WHERE b.title like '%$book_name%'
             ");
+        $data['tags'] = 
+            DB::select('SELECT b.id as book_id, t.id as tag_id, t.name_type 
+                        FROM junction_books_tags j 
+                        INNER JOIN tags t ON t.id = j.id_type 
+                        INNER JOIN books b ON b.id = j.id_book
+                        ORDER BY t.name_type');
         $data['count'] = count($data['books']);
         return view('pages.books.table', $data);
     }
@@ -60,7 +73,7 @@ class BookController extends Controller
             SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
             FROM books b
             INNER JOIN authors a ON a.id = b.id_author
-            ORDER BY b.title ASC
+            ORDER BY a.name ASC
             ");
         } elseif  ($book_sort == 2) {
             $data['books'] = DB::select("
@@ -74,9 +87,16 @@ class BookController extends Controller
             SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
             FROM books b
             INNER JOIN authors a ON a.id = b.id_author
-            ORDER BY a.name ASC
+            ORDER BY b.title ASC
             ");
         }
+
+        $data['tags'] = 
+            DB::select('SELECT b.id as book_id, t.id as tag_id, t.name_type 
+                        FROM junction_books_tags j 
+                        INNER JOIN tags t ON t.id = j.id_type 
+                        INNER JOIN books b ON b.id = j.id_book
+                        ORDER BY t.name_type');
         $data['count'] = count($data['books']);
         return view('pages.books.table', $data);
     }

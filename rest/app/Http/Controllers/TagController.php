@@ -20,7 +20,8 @@ class TagController extends Controller
     {
         $data['tags'] = 
             DB::select('SELECT id, name_type, type_exp 
-                        FROM tags');
+                        FROM tags
+                        ORDER BY name_type');
         $data['books'] = 
             DB::select('SELECT b.id as book_id, b.title, b.publish_year, t.id as tag_id, t.name_type 
                         FROM junction_books_tags j 
@@ -38,6 +39,25 @@ class TagController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $tag_name = $request->search_tag;
+        $data['tags'] = DB::select("
+            SELECT id, name_type, type_exp 
+            FROM tags
+            WHERE name_type like '%$tag_name%'
+            ORDER BY name_type
+            ");
+        $data['books'] = 
+            DB::select('SELECT b.id as book_id, b.title, b.publish_year, t.id as tag_id, t.name_type 
+                        FROM junction_books_tags j 
+                        INNER JOIN tags t ON t.id = j.id_type 
+                        INNER JOIN books b ON b.id = j.id_book
+                        ORDER BY b.title');
+        $data['count'] = count($data['tags']);
+        return view('pages.tags.table', $data);
     }
 
     public function create()

@@ -27,9 +27,9 @@
                         <label>Sort by </label>
                         <select  class="form-control" name="sort_book" required onchange="this.form.submit()">
                             <option selected disabled>--</option>
-                            <option value="1">Title</option>
+                            <option value="1">Author</option>
                             <option value="2">Year Published</option>
-                            <option value="3">Author</option>
+                            <option value="3">Title</option>
                         </select>
                     </form>
                 </div>
@@ -90,6 +90,19 @@
                                                             <tr>
                                                                 <h4><b>Year Published</b>: {{$book->publish_year}}</h4>
                                                             </tr>
+                                                            <hr>
+                                                            <tr>
+                                                                <h4><b>Genre:</b></h4>
+                                                            </tr>
+                                                            <?php $i=1; ?>
+                                                            @foreach($tags as $tag)
+                                                                @if($tag->book_id == $book->id_book)
+                                                                <tr>
+                                                                    <h4>{{$i}}. {{$tag->name_type}}</h4>
+                                                                </tr>
+                                                                <?php $i+=1; ?>
+                                                                @endif
+                                                            @endforeach
                                                             <hr>
                                                             <tr>
                                                                 <h4><b>Synopsis:</b></h4>
