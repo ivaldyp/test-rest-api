@@ -90,3 +90,36 @@ Update data                 : PUT     : /tags       : id(int), name_type(str), t
 ```
 
 ## Menggunakan Web
+
+### Welcome Page
+* Terdapat search bar untuk mencari nama buku.
+* Terdapat link untuk berpindah ke halaman.
+
+### Books Page
+Pengguna dapat:
+* Melihat tabel data seluruh buku
+* Melihat detail suatu buku termasuk nama pengarang dan genrenya.
+* Mencari data buku berdasarkan judul buku.
+* Mengurutkan data buku berdasarkan parameter yang dipilih.
+* Menambah data buku baru.
+* Mengubah data buku yang sudah ada.
+* Menghapus data buku.
+
+### Authors Page
+Pengguna dapat:
+* Melihat tabel data seluruh pengarang.
+* Melihat detail suatu pengarang termasuk nama buku yang telah dikarangnya.
+* Mencari data pengarang berdasarkan nama pengarang.
+* Mengurutkan data pengarang berdasarkan parameter yang dipilih.
+* Menambah data pengarang baru.
+* Mengubah data pengarang yang sudah ada.
+* Menghapus data pengarang.
+
+### Tags Page
+Pengguna dapat:
+* Melihat tabel data seluruh genre.
+* Melihat detail suatu genre termasuk nama buku yang memiliki genre tersebut.
+* Mencari data genre berdasarkan nama genre.
+* Menambah data genre baru.
+* Mengubah data genre yang sudah ada.
+* Menghapus data genre.
