@@ -18,6 +18,7 @@ composer update
 ```
 php artisan serve
 ```
+5. Import file .sql yang telah disediakan. Saya menggunakan phpmyadmin pada XAMPP. Database yang saya buat bernama **testrest**
 
 ## Built With
 
