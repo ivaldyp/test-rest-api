@@ -57,7 +57,7 @@ Get all data, order by ID     : GET     : /books            :
 Get all data, order by title  : GET     : /books-by-title   :
 Get all data, order by year   : GET     : /books-by-year    :
 Get all data, order by author : GET     : /books-by-author  : 
-Get data, search by name      : POST    : /books/search     : search_book(str)
+Get data, search by book name : POST    : /books/search     : search_book(str)
 Get single data by ID         : GET     : /books/{id}       :
 Delete data                   : DELETE  : /books/{id}       :
 Insert data                   : POST    : /books            : title(str), synopsis(str), publish_year(int)
@@ -66,27 +66,29 @@ Update data                   : PUT     : /books            : id(int), title(str
 
 2. Tabel Authors
 ```
-Fungsi                          : Method  : Route         : Parameter
---------------------------------:---------:---------------:---------------------------------
-Get all data, order by ID       : GET     : /authors      :
-Get all data, order by name     : GET     : /authors      :
-Get all data, order by country  : GET     : /authors      :
-Get single data                 : GET     : /authors/{id} :
-Delete data                     : DELETE  : /authors/{id} :
-Insert data                     : POST    : /authors      : name(str), country(str)
-Update data                     : PUT     : /authors      : id(int), name(str), country(str)
+Fungsi                          : Method  : Route           : Parameter
+--------------------------------:---------:-----------------:---------------------------------
+Get all data, order by ID       : GET     : /authors        :
+Get all data, order by name     : GET     : /authors        :
+Get all data, order by country  : GET     : /authors        :
+Get data, search by author name : POST    : /authors/search : search_author(str)
+Get single data                 : GET     : /authors/{id}   :
+Delete data                     : DELETE  : /authors/{id}   :
+Insert data                     : POST    : /authors        : name(str), country(str)
+Update data                     : PUT     : /authors        : id(int), name(str), country(str)
 ```
 
 3. Tabel Tags
 ```
-Fungsi                      : Method  : Route       : Parameter
-----------------------------:---------:-------------:---------------------------------------
-Get all data, order by ID   : GET     : /tags       :
-Get all data, order by name : GET     : /tags       :
-Get single data             : GET     : /tags/{id}  :
-Delete data                 : DELETE  : /tags/{id}  :
-Insert data                 : POST    : /tags       : name_type(str), type_exp(str)
-Update data                 : PUT     : /tags       : id(int), name_type(str), type_exp(str)
+Fungsi                          : Method  : Route         : Parameter
+--------------------------------:---------:---------------:---------------------------------------
+Get all data, order by ID       : GET     : /tags         :
+Get all data, order by name     : GET     : /tags         :
+Get single data                 : GET     : /tags/{id}    :
+Get data, search by genre name  : POST    : /tags/search  : search_tag(str)
+Delete data                     : DELETE  : /tags/{id}    :
+Insert data                     : POST    : /tags         : name_type(str), type_exp(str)
+Update data                     : PUT     : /tags         : id(int), name_type(str), type_exp(str)
 ```
 
 ## Menggunakan Web
