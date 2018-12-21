@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('search', 'BookController@search');
-
 Route::group(['prefix' => 'authors'], function () {
 	Route::get('table', 'AuthorController@showAll');
 	Route::get('form', 'AuthorController@showForm');
@@ -28,6 +26,8 @@ Route::group(['prefix' => 'authors'], function () {
 
 Route::group(['prefix' => 'books'], function () {
 	Route::get('table', 'BookController@showAll');
+	Route::get('search', 'BookController@search');
+	Route::get('sort', 'BookController@sort');
 	Route::get('form', 'BookController@showForm');
 	Route::post('store', 'BookController@store');
 	Route::get('edit/{id}', 'BookController@edit');

@@ -35,14 +35,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Genre</label>
-                                <select class="form-control js-example-basic-multiple" name="id_type[]" required multiple="multiple">
-                                    @foreach($tags as $tag)
-                                    <option value="{{$tag->id}}">{{$tag->name_type}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </div>
                         <div class="box-footer">

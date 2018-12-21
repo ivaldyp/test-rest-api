@@ -10,7 +10,7 @@
             @endif
 
             <a href="{{ url('authors/form') }}">
-                <button class="btn btn-primary" style="margin-bottom: 10px">Add New Author</button>
+                <button class="btn btn-success" style="margin-bottom: 10px">Add New Author</button>
             </a>
             <div class="card">
                 <div class="card-header">Author List</div>
@@ -43,7 +43,7 @@
                                 <td>
                                     <!-- Modal -->
                                     <div id="myModal{{$key}}" class="modal fade" role="dialog">
-                                        <div class="modal-dialog modal-sm">
+                                        <div class="modal-dialog">
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -56,7 +56,7 @@
                                                                 <h4><b>Name</b>: {{$author->name}}</h4>
                                                             </tr>
                                                             <tr>
-                                                                <h4><b>Author</b>: {{$author->country}}</h4>
+                                                                <h4><b>Country from</b>: {{$author->country}}</h4>
                                                             </tr>
                                                         </tbody>
                                                     </table>

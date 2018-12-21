@@ -10,8 +10,9 @@
             @endif
 
             <a href="{{ url('tags/form') }}">
-                <button class="btn btn-primary" style="margin-bottom: 10px">Add New Genre</button>
+                <button class="btn btn-success" style="margin-bottom: 10px">Add New Genre</button>
             </a>
+
             <div class="card">
                 <div class="card-header">Genre List</div>
 
@@ -41,7 +42,7 @@
                                 <td>
                                     <!-- Modal -->
                                     <div id="myModal{{$key}}" class="modal fade" role="dialog">
-                                        <div class="modal-dialog modal-sm">
+                                        <div class="modal-dialog">
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -53,6 +54,26 @@
                                                             <tr>
                                                                 <h4><b>Genre</b>: {{$tag->name_type}}</h4>
                                                             </tr>
+                                                            <hr>
+                                                            <tr>
+                                                                <h4><b>What is {{$tag->name_type}}:</b></h4>
+                                                            </tr>
+                                                            <tr>
+                                                                <h4>{{$tag->type_exp}}</h4>
+                                                            </tr>
+                                                            <hr>
+                                                            <tr>
+                                                                <h4><b>Books example with this genre:</b></h4>
+                                                            </tr>
+                                                            <?php $i=1; ?>
+                                                            @foreach($books as $book)
+                                                                @if($book->tag_id == $tag->id)
+                                                                <tr>
+                                                                    <h4>{{$i}}. {{$book->title}} ({{$book->publish_year}})</h4>
+                                                                </tr>
+                                                                <?php $i+=1; ?>
+                                                                @endif
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>

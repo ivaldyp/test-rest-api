@@ -2,16 +2,45 @@
 
 @section('content')
 <div class="container">
+    <div class="row d-flex">
+        <div class="p-2">
+            <a href="{{ url('books/form') }}">
+                <button class="btn btn-success" style="margin-bottom: 10px; margin-right: 10px">Add New Book</button>
+            </a>
+            <a href="{{ url('books/table') }}">
+                <button class="btn btn-primary" style="margin-bottom: 10px">Show All Books</button>
+            </a>
+        </div>
+        <div class="ml-auto p-2">
+            <div class="form-group">
+                <form method="GET" action="search">
+                    <input type="text" name="search_book" class="form-control" autocomplete="off" placeholder="Book name ...">
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
+        <div class="col-md-12" style="margin-bottom: 10px">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <form method="GET" action="sort">
+                        <label>Sort by </label>
+                        <select  class="form-control" name="sort_book" required onchange="this.form.submit()">
+                            <option selected disabled>--</option>
+                            <option value="1">Title</option>
+                            <option value="2">Year Published</option>
+                            <option value="3">Author</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-5"></div>
+        </div>
         <div class="col-md-12">
             @if(Session::has('message'))
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
-
-            <a href="{{ url('books/form') }}">
-                <button class="btn btn-primary" style="margin-bottom: 10px">Add New Book</button>
-            </a>
-
             <div class="card">
                 <div class="card-header">Books List</div>
 
@@ -45,7 +74,7 @@
                                 <td>
                                     <!-- Modal -->
                                     <div id="myModal{{$key}}" class="modal fade" role="dialog">
-                                        <div class="modal-dialog modal-sm">
+                                        <div class="modal-dialog">
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -57,11 +86,16 @@
                                                             <tr>
                                                                 <h4><b>Author</b>: {{$book->name}}</h4>
                                                             </tr>
+                                                            <hr>
                                                             <tr>
                                                                 <h4><b>Year Published</b>: {{$book->publish_year}}</h4>
                                                             </tr>
+                                                            <hr>
                                                             <tr>
-                                                                <h4><b>Synopsis</b>: {{$book->synopsis}}</h4>
+                                                                <h4><b>Synopsis:</b></h4>
+                                                            </tr>
+                                                            <tr>
+                                                                <h4>{{$book->synopsis}}</h4> 
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -82,13 +116,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('datatables')
-<script>
-// Basic example
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 @endsection

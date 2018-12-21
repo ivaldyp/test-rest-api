@@ -52,6 +52,35 @@ class BookController extends Controller
         return view('pages.books.table', $data);
     }
 
+    public function sort(Request $request)
+    {
+        $book_sort = $request->sort_book;
+        if ($book_sort == 1) {
+            $data['books'] = DB::select("
+            SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+            FROM books b
+            INNER JOIN authors a ON a.id = b.id_author
+            ORDER BY b.title ASC
+            ");
+        } elseif  ($book_sort == 2) {
+            $data['books'] = DB::select("
+            SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+            FROM books b
+            INNER JOIN authors a ON a.id = b.id_author
+            ORDER BY b.publish_year ASC
+            ");
+        } elseif ($book_sort == 3) {
+            $data['books'] = DB::select("
+            SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
+            FROM books b
+            INNER JOIN authors a ON a.id = b.id_author
+            ORDER BY a.name ASC
+            ");
+        }
+        $data['count'] = count($data['books']);
+        return view('pages.books.table', $data);
+    }
+
     public function create()
     {
         //
@@ -64,8 +93,6 @@ class BookController extends Controller
         $book->synopsis = $request->synopsis;
         $book->publish_year = $request->publish_year;
         $book->id_author = $request->id_author;
-        $book->id_type = $request->id_type;
-        var_dump($request->id_type);die();
 
         if($book->save()) {
             return redirect('books/table')->with('message', 'Book data added successfully');

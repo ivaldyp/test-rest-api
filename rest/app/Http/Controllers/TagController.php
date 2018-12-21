@@ -19,8 +19,14 @@ class TagController extends Controller
     public function showAll()
     {
         $data['tags'] = 
-            DB::select('SELECT id, name_type 
+            DB::select('SELECT id, name_type, type_exp 
                         FROM tags');
+        $data['books'] = 
+            DB::select('SELECT b.id as book_id, b.title, b.publish_year, t.id as tag_id, t.name_type 
+                        FROM junction_books_tags j 
+                        INNER JOIN tags t ON t.id = j.id_type 
+                        INNER JOIN books b ON b.id = j.id_book
+                        ORDER BY b.title');
         return view('pages.tags.table', $data);
     }
 

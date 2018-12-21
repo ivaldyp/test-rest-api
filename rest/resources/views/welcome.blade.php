@@ -70,7 +70,7 @@
                 <div class="title m-b-md">
                     DataBook
                 </div>
-                <form method="GET" action="search">
+                <form method="GET" action="books/search">
                     <input type="text" name="search_book" class="form-control" style="margin-bottom: 20px" placeholder="Type book name ..." autocomplete="off">
                 </form>
                 <div class="links">
