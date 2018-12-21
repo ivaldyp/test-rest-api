@@ -47,6 +47,23 @@ class TagController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $tag_name = $request->input('search_tag');
+        $data['tags'] = DB::select("
+            SELECT id, name_type, type_exp
+            FROM tags
+            WHERE name_type like '%$tag_name%'
+            ");
+        $data['count'] = count($data['tags']);
+        
+        return response()->json([
+            "message" => "success",
+            "total" => $data['count'],
+            "data" => $data['tags']
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

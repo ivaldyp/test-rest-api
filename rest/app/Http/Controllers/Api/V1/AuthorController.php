@@ -62,6 +62,23 @@ class AuthorController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $author_name = $request->input('search_author');
+        $data['authors'] = DB::select("
+            SELECT id, name, country
+            FROM authors
+            WHERE name like '%$author_name%'
+            ");
+        $data['count'] = count($data['authors']);
+        
+        return response()->json([
+            "message" => "success",
+            "total" => $data['count'],
+            "data" => $data['authors']
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

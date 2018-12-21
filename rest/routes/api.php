@@ -29,6 +29,7 @@ Route::put('books', 'Api\V1\BookController@store');
 Route::get('authors', 'Api\V1\AuthorController@index');
 Route::get('authors-by-name', 'Api\V1\AuthorController@indexname');
 Route::get('authors-by-country', 'Api\V1\AuthorController@indexcountry');
+Route::post('authors/search', 'Api\V1\AuthorController@search');
 Route::get('authors/{id}', 'Api\V1\AuthorController@show');
 Route::delete('authors/{id}', 'Api\V1\AuthorController@destroy');
 Route::post('authors', 'Api\V1\AuthorController@store');
@@ -38,6 +39,7 @@ Route::put('authors', 'Api\V1\AuthorController@store');
 //Route untuk Tags
 Route::get('tags', 'Api\V1\TagController@index');
 Route::get('tags-by-name', 'Api\V1\TagController@indexname');
+Route::post('tags/search', 'Api\V1\TagController@search');
 Route::get('tags/{id}', 'Api\V1\TagController@show');
 Route::delete('tags/{id}', 'Api\V1\TagController@destroy');
 Route::post('tags', 'Api\V1\TagController@store');
