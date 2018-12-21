@@ -88,6 +88,7 @@ class TagController extends Controller
         $tag = Tag::find($id);
 
         $tag->name_type = $request->name_type;
+        $tag->type_exp = $request->type_exp;
 
         if($tag->save()) {
             return redirect('tags/table')->with('message', 'Genre data edited successfully');

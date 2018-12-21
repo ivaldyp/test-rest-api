@@ -42,7 +42,7 @@
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
             <div class="card">
-                <div class="card-header">Books List</div>
+                <div class="card-header"><b>Books List</b></div>
 
                 <div class="card-body">
                     <table class="table data-tabel" id="example">

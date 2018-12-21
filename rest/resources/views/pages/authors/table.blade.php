@@ -43,7 +43,7 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Author List</div>
+                <div class="card-header"><b>Author List</b></div>
                 <div class="card-body">
 
                     <table class="table">

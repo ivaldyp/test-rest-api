@@ -27,7 +27,7 @@
             @endif
 
             <div class="card">
-                <div class="card-header">Genre List</div>
+                <div class="card-header"><b>Genre List</b></div>
 
                 <div class="card-body">
                     <table class="table">
