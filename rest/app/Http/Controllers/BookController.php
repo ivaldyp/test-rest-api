@@ -73,21 +73,21 @@ class BookController extends Controller
             SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
             FROM books b
             INNER JOIN authors a ON a.id = b.id_author
-            ORDER BY a.name ASC
+            ORDER BY a.name ASC, b.title ASC
             ");
         } elseif  ($book_sort == 2) {
             $data['books'] = DB::select("
             SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
             FROM books b
             INNER JOIN authors a ON a.id = b.id_author
-            ORDER BY b.publish_year ASC
+            ORDER BY b.publish_year ASC, b.title ASC
             ");
         } elseif ($book_sort == 3) {
             $data['books'] = DB::select("
             SELECT b.id as id_book, b.title, b.synopsis, b.publish_year, a.name, a.id as id_author
             FROM books b
             INNER JOIN authors a ON a.id = b.id_author
-            ORDER BY b.title ASC
+            ORDER BY b.title ASC, a.name ASC
             ");
         }
 

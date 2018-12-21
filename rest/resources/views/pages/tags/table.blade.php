@@ -48,9 +48,7 @@
                                     <a href="{{ url('tags/edit') }}/{{ $tag->id }}">
                                         <button class="btn btn-info">Edit</button>
                                     </a>
-                                    <a href="{{ url('tags/delete') }}/{{ $tag->id }}">
-                                        <button class="btn btn-danger">Delete</button>
-                                    </a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteWarning{{$tag->id}}">Delete</button>
                                 </td>
                                 <td>
                                     <!-- Modal -->
@@ -92,6 +90,29 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="deleteWarning{{$tag->id}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"><b>Warning</b></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table>
+                                                        <tbody>
+                                                            <h4>Do you really want to delete {{$tag->name_type}}'s data?</h4>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <a href="{{ url('tags/delete') }}/{{ $tag->id }}">
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

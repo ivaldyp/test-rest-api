@@ -113,7 +113,7 @@
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">Warning</h4>
+                                                    <h4 class="modal-title"><b>Warning</b></h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <table>

@@ -101,7 +101,7 @@ class TagController extends Controller
         $junction = DB::delete("DELETE FROM junction_books_tags where id_type = $id ");
         $tag = Tag::where('id', $id);
         if($tag->delete()) {
-            return redirect('tags/table')->with('message', 'Tag data deleted successfully');
+            return redirect('tags/table')->with('message', 'Genre data deleted successfully');
         } else {
             return redirect('tags/table')->with('message', 'Failed to delete tag data');
         }
