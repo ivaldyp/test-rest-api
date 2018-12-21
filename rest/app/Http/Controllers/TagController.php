@@ -69,6 +69,7 @@ class TagController extends Controller
     {
         $tag = new Tag;
         $tag->name_type = $request->name_type;
+        $tag->type_exp = $request->type_exp;
         if($tag->save()) {
             return redirect('tags/table')->with('message', 'Genre data added successfully');
         } else {
@@ -97,6 +98,7 @@ class TagController extends Controller
 
     public function delete($id)
     {
+        $junction = DB::delete("DELETE FROM junction_books_tags where id_type = $id ");
         $tag = Tag::where('id', $id);
         if($tag->delete()) {
             return redirect('tags/table')->with('message', 'Tag data deleted successfully');

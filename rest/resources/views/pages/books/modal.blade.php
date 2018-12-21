@@ -41,12 +41,19 @@
                             <div class="form-group">
                                 <label>Genre</label>
                                 <select class="form-control js-example-basic-multiple" name="id_type[]" required multiple="multiple">
-                                    @foreach($data['tags'] as $tag)
-                                    <option
-                                    <?php if($data['book']->id_type == $tag['id'])
-                                        echo "selected='selected'"
-                                    ?>
-                                    value="{{$tag->id}}">{{$tag->name_type}}</option>
+                                    @foreach($data['tagsall'] as $tag)
+                                        {{$flag = 0}}
+                                        @foreach($data['tags'] as $tagsingle)
+                                        <option
+                                        <?php if($tag->id == $tagsingle->tag_id)
+                                            echo "selected='selected'"
+                                        ?>
+                                        value="{{$tag->id}}">{{$tag->name_type}}</option>
+                                        {{$flag = 1}}
+                                        @endforeach
+                                        @if($flag == 0)
+                                            <option value="{{$tag->id}}">{{$tag->name_type}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

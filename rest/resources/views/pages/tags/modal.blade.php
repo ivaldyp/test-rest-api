@@ -17,6 +17,11 @@
                                 <label>Genre Name</label>
                                 <input type="text" class="form-control" name="name_type" autocomplete="off" required value="{{ $tag->name_type }}">
                             </div>
+                            <div class="form-group">
+                                <label>Explanation</label>
+                                <textarea class="form-control" name="type_exp" autocomplete="off">{{ $tag->type_exp }}
+                                </textarea>
+                            </div>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </div>
                         <div class="box-footer">
