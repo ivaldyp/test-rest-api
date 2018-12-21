@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Book;
+use App\Tag;
 use App\Author;
 use App\Http\Controllers\Controller;
 
@@ -122,6 +124,13 @@ class AuthorController extends Controller
     public function delete($id)
     {
         $author = Author::where('id', $id);
+        $book = DB::select("SELECT id FROM books WHERE id_author = $id ");
+        for($i=0; $i<count($book); $i++)
+        {
+            $id_book = $book[$i]->id;
+            $junction = DB::delete("DELETE FROM junction_books_tags where id_book = $id_book ");
+            $bookdelete = DB::delete("DELETE FROM books where id = $id_book ");
+        }
         if($author->delete()) {
             return redirect('authors/table')->with('message', 'Author data deleted successfully');
         } else {

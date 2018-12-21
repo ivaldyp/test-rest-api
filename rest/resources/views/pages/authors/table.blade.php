@@ -44,8 +44,8 @@
 
             <div class="card">
                 <div class="card-header">Author List</div>
-
                 <div class="card-body">
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -66,9 +66,7 @@
                                     <a href="{{ url('authors/edit') }}/{{ $author->id }}">
                                         <button class="btn btn-info">Edit</button>
                                     </a>
-                                    <a href="{{ url('authors/delete') }}/{{ $author->id }}">
-                                        <button class="btn btn-danger">Delete</button>
-                                    </a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteWarning{{$author->id}}">Delete</button>    
                                 </td>
                                 <td>
                                     <!-- Modal -->
@@ -106,6 +104,29 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="deleteWarning{{$author->id}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Warning</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table>
+                                                        <tbody>
+                                                            <h4>Deleting author's data will delete all their book's data as well, continue?</h4>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <a href="{{ url('authors/delete') }}/{{ $author->id }}">
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
