@@ -9,7 +9,7 @@ Aplikasi ini tidak di deploy ke server, oleh karena itu aplikasi ini hanya dapat
 ### Step by Step
 
 1. Clone aplikasi ini.
-2. Import file =========>>>>>>>>>>>>namanya.db yang terdapat pada aplikasi ini.
+2. Import file **testrest.sql** yang terdapat pada aplikasi ini. Saya menggunakan phpmyadmin pada XAMPP. Database yang saya buat bernama **testrest**
 3. Masuk ke direktori aplikasi dan lakukan **update composer** menggunakan terminal atau cmd.
 ```
 composer update
@@ -18,7 +18,6 @@ composer update
 ```
 php artisan serve
 ```
-5. Import file .sql yang telah disediakan. Saya menggunakan phpmyadmin pada XAMPP. Database yang saya buat bernama **testrest**
 
 ## Built With
 
